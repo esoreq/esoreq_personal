@@ -53,15 +53,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
     to the discussion.</p> </div>
 
 ----
-<!-- .slide: data-transition="fade-in" -->
-<!-- .slide: data-background="#ffffff" data-transition="zoom" -->
-# Different levels of Reproducibility
-<div class="centered_image">
-    <img src="https://the-turing-way.netlify.app/_images/ReproducibleMatrix.jpg">
-</div>
 
-[source:the-turing-way]('https://the-turing-way.netlify.app/reproducible-research/overview/overview-definitions#table-of-definitions-for-reproducibility')
-----
 <!-- .slide: data-transition="fade-in" -->
 <!-- .slide: data-background="#ffffff" data-transition="zoom" -->
 ### Have you failed to reproduce an experiment?
@@ -74,21 +66,53 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 ----
 <!-- .slide: data-transition="fade-in" -->
 <!-- .slide: data-background="#ffffff" data-transition="zoom" -->
-### Have you established procedures for reproducibility?
-<div class="centered_image">
-    <img src="img/repo_nature-04.png">
-</div>
+### Why do we have the replication crisis?
+
+- Cultural
+    - Pressure to publish in prestigious journals requires 'impactful' results to get published
+    - Bias against negative results
+- Statistical
+    - Why Most Published Research Findings Are False - 2005 John P. A. Ioannidis
+        - Studies rely on questionable research practices
+        - Sample Sizes are too small to justify conclusion
+        - p-hacking: running too many statistical tests and only reporting the good ones
+- Experimental
+    - Even if non of the above hold, most published studies fail to supply enough detail to rerun the experiment and analysis   
 
 
-[source:nature-2016]('https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970')
+
+[source:plosmedicine-2005]('https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124&xid=17259,15700019,15700186,15700190,15700248')
 
 
 ----
-# Yes there is a reproducibility crisis!
+# What can we do?
 
-- 52% of researchers think there is a significant reproducibility crisis
-- 70% of scientists have tried but failed to reproduce another scientist’s experiments
+- A better understanding of reproducibility practices
+- More reliable data sources with less experiments
+   - Aim for larger sample sizes with more angles
+   - Transparency in protocol
+- Incorporate pre registration of individual analyses
+- Open Science Practices and Metadata
+   - Be transparent about your study
+   - When possible, share raw data
+   - To share sensitive data, you may be able to use synthetic data reflecting some of the original data complexity
+   - Share code in a reusable format that is easy to understand 
+   - Consider using package manger to share your code
+   - Or some container  
 
+----
+
+<!-- .slide: data-transition="fade-in" -->
+<!-- .slide: data-background="#ffffff" data-transition="zoom" -->
+# Different levels of Reproducibility
+<div class="centered_image">
+    <img src="https://the-turing-way.netlify.app/_images/ReproducibleMatrix.jpg">
+</div>
+
+- Reproducible: A result is computationally reproducible when the same analysis steps performed on the same dataset consistently produces the same answer.
+
+
+[source:the-turing-way]('https://the-turing-way.netlify.app/reproducible-research/overview/overview-definitions#table-of-definitions-for-reproducibility')
 ----
 <!-- .slide: data-background="https://i2.pickpik.com/photos/110/568/870/files-ddr-archive-preview.jpg" -->
 <div style="width: 90%;margin: 0;background-color: rgba(255,255,255,0.5);color:black;">
