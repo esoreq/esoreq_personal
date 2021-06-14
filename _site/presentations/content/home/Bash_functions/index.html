@@ -1,0 +1,746 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Even More Advanced Bash - Eyal Soreq</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Eyal Soreq">
+<meta property="og:title" content="Even More Advanced Bash">
+
+
+  <link rel="canonical" href="http://localhost:4000/presentations/content/home/Bash_functions/">
+  <meta property="og:url" content="http://localhost:4000/presentations/content/home/Bash_functions/">
+
+
+
+
+
+  <meta name="twitter:site" content="@e_soreq">
+  <meta name="twitter:title" content="Even More Advanced Bash">
+  <meta name="twitter:description" content="personal description">
+  <meta name="twitter:url" content="http://localhost:4000/presentations/content/home/Bash_functions/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Eyal Soreq",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Eyal Soreq Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="http://localhost:4000/images/apple-touch-icon-57x57.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="60x60" href="http://localhost:4000/images/apple-touch-icon-60x60.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="76x76" href="http://localhost:4000/images/apple-touch-icon-76x76.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="120x120" href="http://localhost:4000/images/apple-touch-icon-120x120.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="152x152" href="http://localhost:4000/images/apple-touch-icon-152x152.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:4000/images/apple-touch-icon-180x180.png?v=M44lzPylqQ">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-32x32.png?v=M44lzPylqQ" sizes="32x32">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/android-chrome-192x192.png?v=M44lzPylqQ" sizes="192x192">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-96x96.png?v=M44lzPylqQ" sizes="96x96">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-16x16.png?v=M44lzPylqQ" sizes="16x16">
+<link rel="manifest" href="http://localhost:4000/images/manifest.json?v=M44lzPylqQ">
+<link rel="mask-icon" href="http://localhost:4000/images/safari-pinned-tab.svg?v=M44lzPylqQ" color="#000000">
+<link rel="shortcut icon" href="/images/favicon.ico?v=M44lzPylqQ">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="http://localhost:4000/images/mstile-144x144.png?v=M44lzPylqQ">
+<meta name="msapplication-config" content="http://localhost:4000/images/browserconfig.xml?v=M44lzPylqQ">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="http://localhost:4000/assets/css/academicons.css"/>
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/">Eyal Soreq</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/teaching/">Teaching</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/images/profile.png" class="author__avatar" alt="Eyal Soreq Ph.D.">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Eyal Soreq Ph.D.</h3>
+    <p class="author__bio">I apply and develop machine learning and data science methods to improve our understanding of dementia related behavioral patterns</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+      
+      
+      
+      
+       
+      
+        <li><a href="https://twitter.com/e_soreq"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/esoreq"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=_COL8loAAAAJ"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
+      
+      
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=Soreq+E&sort=pubdate"><i class="ai ai-pubmed-square ai-fw"></i> PubMed</a></li>
+      
+      
+        <li><a href="https://orcid.org/0000-0003-4809-4889"><i class="ai ai-orcid-square ai-fw"></i> ORCID</a></li>
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Even More Advanced Bash">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Even More Advanced Bash
+</h1>
+          
+        
+        
+        
+        
+             
+        
+    
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+<h1 id="even-more-advanced-bash">Even More Advanced Bash</h1>
+
+<ul>
+  <li>In this section we will go over some more advanced Bash concepts</li>
+  <li>We will also cover how to create functions to automate things</li>
+  <li>I will share with you some functions I created to simplify my life in the gwdg cluster</li>
+  <li>If you want to expand your Bash skills <a href="https://www.tldp.org/LDP/abs/html/abs-guide.html">this</a> is a good place to start</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="conditionals">Conditionals</h2>
+
+<ul>
+  <li>We previously used the <code class="language-plaintext highlighter-rouge">IF</code> statement in our <code class="language-plaintext highlighter-rouge">.bashrc</code> file.</li>
+  <li>The most basic form of conditionals is:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span>condition is <span class="nb">true</span><span class="o">]</span> <span class="k">then</span> <span class="o">[</span><span class="k">do </span>something]. 
+</code></pre></div>    </div>
+  </li>
+  <li>We can extend this by adding <code class="language-plaintext highlighter-rouge">else</code></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span>condition is <span class="nb">true</span><span class="o">]</span> 
+<span class="k">then</span> 
+    <span class="o">[</span><span class="k">do </span>something] 
+<span class="k">else</span> <span class="o">[</span>condition is <span class="nb">false</span><span class="o">]</span> 
+<span class="k">then</span> 
+    <span class="o">[</span><span class="k">do </span>something <span class="k">else</span> <span class="o">]</span><span class="nb">.</span> 
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="conditionals-1">Conditionals</h2>
+
+<ul>
+  <li>Using Bash syntax (i.e. the set of rules that defines the combinations of symbols that are considered to be a correctly structured and therefore usable code)</li>
+  <li>Our previous example will look like this:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="sb">`</span> <span class="o">[</span>expression]<span class="p">;</span> <span class="k">then</span> 
+    <span class="o">[</span><span class="k">do </span>something] 
+<span class="k">else</span> 
+    <span class="o">[</span><span class="k">do </span>something <span class="k">else</span><span class="o">]</span> 
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="conditionals-2">Conditionals</h2>
+
+<ul>
+  <li>This can be extended even further using else if which allows us to add conditions and in fact create hierarchy.</li>
+  <li>Consider the following program</li>
+  <li>Try to understand this and goto the next slide for a breakdown</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">cTime</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> +%H<span class="si">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$cTime</span> <span class="nt">-gt</span> 06 <span class="nt">-a</span> <span class="nv">$cTime</span> <span class="nt">-le</span> 12 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Good Morning"</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="nv">$cTime</span> <span class="nt">-gt</span> 12 <span class="nt">-a</span> <span class="nv">$cTime</span> <span class="nt">-le</span> 18 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Good Afternoon"</span>
+<span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"Good night"</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="lets-unpack">Let’s unpack</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">cTime=$(date +%H)</code></td>
+      <td style="text-align: left">store the current hour in a variable</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">IF</code></td>
+      <td style="text-align: left">Start the conditional statement</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$cTime -gt 06</code></td>
+      <td style="text-align: left">Check if time is greater than 6</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-a</code></td>
+      <td style="text-align: left">logical AND</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$cTime -le 12</code></td>
+      <td style="text-align: left">less or equal to 12</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">if true</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">echo "Good Morning"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ELSE IF</code></td>
+      <td style="text-align: left">Another conditional statement</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">cTime &gt; 12 &amp; cTime &lt;= 18</code></td>
+      <td style="text-align: left">Same as above</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">if true</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">echo "Good Afternoon"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ELSE</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">i.e. cTime &gt; 18 &amp; cTime &lt;= 6</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">if both are false</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">echo "Good Afternoon"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>//slide//</p>
+
+<h2 id="making-this-into-a-function-is-dead-simple">Making this into a function is dead simple</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>greeting <span class="o">{</span>
+<span class="nv">cTime</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> +%H<span class="si">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$cTime</span> <span class="nt">-gt</span> 06 <span class="nt">-a</span> <span class="nv">$cTime</span> <span class="nt">-le</span> 12 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Good Morning"</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="nv">$cTime</span> <span class="nt">-gt</span> 12 <span class="nt">-a</span> <span class="nv">$cTime</span> <span class="nt">-le</span> 18 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Good Afternoon"</span>
+<span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"Good night"</span>
+<span class="k">fi</span><span class="p">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="we-can-also-add-variables">We can also add variables</h2>
+
+<ul>
+  <li>The dollar $ sign with a number will capture variables that our function can use</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>greeting <span class="o">{</span>
+<span class="nv">cTime</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> +%H<span class="si">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$cTime</span> <span class="nt">-gt</span> 06 <span class="nt">-a</span> <span class="nv">$cTime</span> <span class="nt">-le</span> 12 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Good Morning </span><span class="nv">$1</span><span class="s2">"</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="nv">$cTime</span> <span class="nt">-gt</span> 12 <span class="nt">-a</span> <span class="nv">$cTime</span> <span class="nt">-le</span> 18 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Good Afternoon </span><span class="nv">$1</span><span class="s2">"</span>
+<span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"Good night </span><span class="nv">$1</span><span class="s2">"</span>
+<span class="k">fi</span><span class="p">;</span>
+<span class="o">}</span>
+greeting <span class="s2">"Your Name"</span> <span class="c"># will add a name as a variable </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="bash_functions">.Bash_functions</h2>
+
+<ul>
+  <li>Like the aliases we want to simplify our life (and reduce typing) by creating functions that take anything that we will use often and convert it into a function.</li>
+  <li>And we obviously want these functions to be there anytime we log into the cluster</li>
+  <li>Let’s create a .Bash_functions file and make it load on login</li>
+  <li>Any useful function should go in this file</li>
+  <li>Try to do this on your own and go to the next slide and see my example</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="bash_functions-1">.Bash_functions</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch</span> ~/.Bash_functions <span class="c"># create a dot functions file </span>
+<span class="c"># now add this to ~/.bashrc file to source when you login</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> ~/.bash_functions <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">.</span> ~/.bash_functions   <span class="c"># --&gt; source local functions if present.</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="no-lets-go-over-some-of-my-most-useful-functions">No let’s go over some of my most useful functions</h2>
+
+<ul>
+  <li>Function mcd will create a directory and then immediately move into that directory.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a directory and move into it</span>
+<span class="k">function  </span>mcd <span class="o">{</span>
+    <span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$1</span>
+    <span class="nb">cd</span> <span class="nv">$1</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="function-sp---step-up">function sp - step up</h2>
+
+<ul>
+  <li>This one will step up in the directory hierarchy the specified number of steps</li>
+  <li>Again try to see what and how I do things here</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Step up the folder tree $1 times  </span>
+<span class="k">function </span>sp <span class="o">{</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"You forgot to give a number!"</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="nv">$1</span> <span class="nt">-eq</span> <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    if</span> <span class="o">[</span> <span class="nv">$1</span> <span class="nt">-gt</span> 9 <span class="nt">-o</span> <span class="nv">$1</span> <span class="nt">-lt</span> 1 <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2"> is not a valid variable"</span>
+    <span class="k">else
+        for </span>i <span class="k">in</span> <span class="si">$(</span><span class="nb">seq </span>1 <span class="nv">$1</span><span class="si">)</span><span class="p">;</span> <span class="k">do
+            </span><span class="nb">cd</span> ..
+        <span class="k">done</span><span class="p">;</span>
+    <span class="k">fi</span><span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="function-pull---simplify-git-pull">function pull - simplify git pull</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># will go to a git folder pull an updated version and return to origin</span>
+<span class="k">function </span>pull <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">origin</span><span class="o">=</span><span class="nv">$PWD</span>
+    <span class="nb">cd</span> <span class="nv">$1</span>  
+    git pull origin master
+    <span class="nb">cd</span> <span class="nv">$origin</span>
+  <span class="k">else
+    </span>git pull origin master
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="function-push---simplify-git-push">function push - simplify git push</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># will go to a git folder push a committed folder and return to origin</span>
+<span class="k">function </span>push <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">origin</span><span class="o">=</span><span class="nv">$PWD</span>
+    <span class="nb">cd</span> <span class="nv">$1</span>  
+    git push origin master
+    <span class="nb">cd</span> <span class="nv">$origin</span>
+  <span class="k">else
+    </span>git push origin master
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="function-commit---simplify-git-commit">function commit - simplify git commit</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># will go to a git folder </span>
+<span class="c"># Add all files, commit them and push to remote  </span>
+<span class="k">function </span>commit <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">origin</span><span class="o">=</span><span class="nv">$PWD</span>
+    <span class="nb">cd</span> <span class="nv">$1</span>
+    git add <span class="nt">--all</span> 
+    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="o">]</span> <span class="p">;</span> <span class="k">then
+        </span>git commit <span class="nt">-m</span> <span class="nv">$2</span>
+    <span class="k">else         
+        </span>git commit <span class="nt">-m</span> <span class="s2">"routine update on </span><span class="si">$(</span><span class="nb">date</span> <span class="nt">-u</span><span class="si">)</span><span class="s2">"</span> 
+    <span class="k">fi    
+    </span>git push origin master
+    <span class="nb">cd</span> <span class="nv">$origin</span>
+  <span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"This functions requires some input"</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="function-remote---simplify-git-remote">function remote - simplify git remote</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a new repository on GitHub </span>
+<span class="c"># Syntax newRepo $repo_name $GIT_USER $GIT_TOKEN</span>
+<span class="k">function </span>remote <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="nt">-a</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">REPO</span><span class="o">=</span>git@github.com:<span class="nv">$1</span>/<span class="nv">$2</span>.git
+    git remote add origin <span class="nv">$REPO</span>
+  <span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"Give username and repository name"</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>//slide//</p>
+
+<h2 id="function-newrepo---simplify-new-git-repository-creation">function newRepo - simplify new git repository creation</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a new repository on GitHub </span>
+<span class="c"># Syntax newRepo $repo_name $GIT_USER $GIT_TOKEN</span>
+<span class="k">function </span>newRepo <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="nv">$1</span> <span class="nt">-a</span> <span class="nt">-z</span> <span class="nv">$2</span> <span class="nt">-a</span> <span class="nt">-z</span> <span class="nv">$3</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"You need to give your repository a name"</span>
+  <span class="k">else
+    </span>mcd <span class="nv">$1</span>   <span class="c"># create and goto the folder</span>
+    git init <span class="c"># make a git initialized folder </span>
+    <span class="nv">AUTH</span><span class="o">=</span><span class="s2">"Authorization: token </span><span class="nv">$3</span><span class="s2">"</span>
+    <span class="nv">DATA</span><span class="o">=</span><span class="si">$(</span><span class="nb">printf</span> <span class="s1">'{"name":"%s"}'</span> <span class="nv">$1</span><span class="si">)</span>
+    <span class="nv">API</span><span class="o">=</span><span class="s2">"https://api.github.com/user/repos"</span>
+    curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH</span><span class="s2">"</span> https://api.github.com/user/repos <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$DATA</span><span class="s2">"</span>
+    remote <span class="nv">$2</span> <span class="nv">$1</span> 
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="function-delrepo---simplify-git-repository-deletion">function delRepo - simplify git repository deletion</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Delete a repository on GitHub </span>
+<span class="c"># Syntax delRepo $repo_name $GIT_TOKEN $GIT_USER  </span>
+<span class="k">function </span>delRepo <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="nv">$1</span> <span class="nt">-a</span> <span class="nt">-z</span> <span class="nv">$2</span> <span class="nt">-a</span> <span class="nt">-z</span> <span class="nv">$3</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"You need to give your repository a name"</span>
+  <span class="k">else
+    </span><span class="nv">AUTH</span><span class="o">=</span><span class="s2">"Authorization: token </span><span class="nv">$2</span><span class="s2">"</span>
+    curl <span class="nt">-X</span> DELETE <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH</span><span class="s2">"</span> https://api.github.com/repos/<span class="nv">$3</span>/<span class="nv">$1</span> 
+    <span class="nb">rm</span> <span class="nt">-rf</span> ~/github/<span class="nv">$1</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>//slide//</p>
+
+<h2 id="function-clone---simplify-git-repository-cloning">function clone - simplify git repository cloning</h2>
+
+<ul>
+  <li>A clone is a local copy of some remote repository</li>
+  <li>We want our clones to be in one tidy place</li>
+  <li>For me its a folder called github</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># make sure all cloned repositories are stored in one neat place</span>
+<span class="k">function </span>clone <span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"You need to give a git url"</span>
+  <span class="k">else
+    </span><span class="nv">origin</span><span class="o">=</span><span class="nv">$PWD</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="nv">$2</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">cd</span> ~/github
+    <span class="k">else 
+        </span><span class="nb">cd</span> <span class="nv">$2</span>
+    <span class="k">fi
+    </span>git clone <span class="nv">$1</span>
+    <span class="nb">cd</span> <span class="nv">$origin</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="can-anybody-push-files-to-my-repository-on-github">Can anybody push files to my repository on github?</h2>
+
+<ul>
+  <li>Nobody can push directly to your repository if you are not already granting them write access</li>
+  <li>This is true even if your repository isn’t private</li>
+  <li>A private repository simply means that only approved users can see on-line content</li>
+  <li>The process of contributing to a public repository in GitHub starts by forking the repository</li>
+  <li>For those interested <a href="https://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/">here is nice summary</a></li>
+  <li>In this course we will not require such process instead we will use a shared space on the cluster.</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li>Ok this almost sums up your introduction to bash and the cluster</li>
+  <li>During the course we will probably add a few more aliases and functions</li>
+  <li>This is a good opportunity to go over the various commands and see that you understood everything</li>
+  <li>Also on a personal note, please make note for anything that isn’t clear so I can learn from your experience</li>
+  <li>When you are ready press on the right arrow for the final section and your home assignment</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<a href="/sitemap/">Sitemap</a>
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/@e_soreq"><i class="fab fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/esoreq"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 Eyal Soreq. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+

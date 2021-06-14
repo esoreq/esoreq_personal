@@ -1,0 +1,667 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Some bash Basics - Eyal Soreq</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Eyal Soreq">
+<meta property="og:title" content="Some bash Basics">
+
+
+  <link rel="canonical" href="http://localhost:4000/presentations/content/home/Bash/">
+  <meta property="og:url" content="http://localhost:4000/presentations/content/home/Bash/">
+
+
+
+
+
+  <meta name="twitter:site" content="@e_soreq">
+  <meta name="twitter:title" content="Some bash Basics">
+  <meta name="twitter:description" content="personal description">
+  <meta name="twitter:url" content="http://localhost:4000/presentations/content/home/Bash/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Eyal Soreq",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Eyal Soreq Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="http://localhost:4000/images/apple-touch-icon-57x57.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="60x60" href="http://localhost:4000/images/apple-touch-icon-60x60.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="76x76" href="http://localhost:4000/images/apple-touch-icon-76x76.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="120x120" href="http://localhost:4000/images/apple-touch-icon-120x120.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="152x152" href="http://localhost:4000/images/apple-touch-icon-152x152.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:4000/images/apple-touch-icon-180x180.png?v=M44lzPylqQ">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-32x32.png?v=M44lzPylqQ" sizes="32x32">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/android-chrome-192x192.png?v=M44lzPylqQ" sizes="192x192">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-96x96.png?v=M44lzPylqQ" sizes="96x96">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-16x16.png?v=M44lzPylqQ" sizes="16x16">
+<link rel="manifest" href="http://localhost:4000/images/manifest.json?v=M44lzPylqQ">
+<link rel="mask-icon" href="http://localhost:4000/images/safari-pinned-tab.svg?v=M44lzPylqQ" color="#000000">
+<link rel="shortcut icon" href="/images/favicon.ico?v=M44lzPylqQ">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="http://localhost:4000/images/mstile-144x144.png?v=M44lzPylqQ">
+<meta name="msapplication-config" content="http://localhost:4000/images/browserconfig.xml?v=M44lzPylqQ">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="http://localhost:4000/assets/css/academicons.css"/>
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/">Eyal Soreq</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/teaching/">Teaching</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/images/profile.png" class="author__avatar" alt="Eyal Soreq Ph.D.">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Eyal Soreq Ph.D.</h3>
+    <p class="author__bio">I apply and develop machine learning and data science methods to improve our understanding of dementia related behavioral patterns</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+      
+      
+      
+      
+       
+      
+        <li><a href="https://twitter.com/e_soreq"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/esoreq"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=_COL8loAAAAJ"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
+      
+      
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=Soreq+E&sort=pubdate"><i class="ai ai-pubmed-square ai-fw"></i> PubMed</a></li>
+      
+      
+        <li><a href="https://orcid.org/0000-0003-4809-4889"><i class="ai ai-orcid-square ai-fw"></i> ORCID</a></li>
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Some bash Basics">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Some bash Basics
+</h1>
+          
+        
+        
+        
+        
+             
+        
+    
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+<h1 id="some-bash-basics">Some bash Basics</h1>
+
+<ul>
+  <li>In this section we will cover how to create custom commands (aliases), allowing you to create shortcuts for a single command or a group of commands.</li>
+  <li>We will also learn how to configure your personal home account on the cluster</li>
+  <li>How to transfer files from and to the cluster</li>
+  <li>Finally how to extend the cluster functionality using modules</li>
+</ul>
+
+<p>//slide//</p>
+
+<h1 id="intro">Intro</h1>
+
+<ul>
+  <li>
+    <p>The bash Shell (Bourne Again SHell), is a command-line interface (CLI). Lets go over the most popular commands, and learn how to use them.</p>
+  </li>
+  <li>
+    <p>If you want to extend your understanding you should consider taking <a href="https://www.educative.io/courses/master-the-sh-shell">Learn bash the Hard Way</a>.</p>
+  </li>
+</ul>
+
+<p>//slide//</p>
+
+<h1 id="intro-1">Intro</h1>
+
+<ul>
+  <li>
+    <p>However, for our needs the basics we will cover this week should be enough</p>
+  </li>
+  <li>If you just want to know more on a specific issue here are some websites that can be useful:
+    <ul>
+      <li><a href="https://www.educative.io/blog/sh-shell-command-cheat-sheet">sh-shell-command-cheat-sheet</a></li>
+      <li><a href="https://www.tecmint.com/">TecMint</a></li>
+      <li><a href="https://www.tldp.org/LDP/abs">Advanced sh-Scripting Guide</a></li>
+    </ul>
+  </li>
+  <li>Finally here is a good <a href="https://devhints.io/sh">Cheat sheet</a> to explore when trying to understand my functions</li>
+</ul>
+
+<p>//slide//</p>
+<h2 id="bash-basics">bash Basics</h2>
+
+<ul>
+  <li>Lets go over some important commands and how to use them.</li>
+  <li>Almost all commands in bash will have some help option (try it!)</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">--help</span> <span class="c"># Open the help page of the command </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="cdpwd---change-directory-and-print-working-directory">cd,pwd - Change directory and Print working directory</h2>
+
+<h3 id="examples">Examples</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>Mail <span class="c"># change the directory </span>
+<span class="nb">pwd</span> <span class="c"># print the current directory. </span>
+<span class="nb">cd</span> /  <span class="c"># change directory to the root directory</span>
+<span class="nb">cd</span> ~  <span class="c"># change directory to your home directory</span>
+<span class="nb">cd </span>dir_root/dir_branch/dir_leaf <span class="c"># goto leaf dir</span>
+<span class="nb">cd</span> .. <span class="c"># go back one level </span>
+<span class="nb">cd</span> <span class="s2">"dir name"</span> 
+<span class="c"># if for some reason you created a folder name with spaces </span>
+<span class="c"># (DONT!!!) this is how you call it </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="mkdir---create-a-directory">mkdir - Create a directory</h2>
+
+<p>The mkdir command in UNIX allows users to create directories aka folders.</p>
+
+<h3 id="examples-1">Examples</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/sandbox   
+<span class="c"># create a folder named sandbox in your home directory</span>
+<span class="nb">cd</span> ~/sandbox
+<span class="nb">mkdir </span>dir_1 dir_2  
+<span class="c"># create multiple directories </span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> dir_root/dir_branch/dir_leaf 
+<span class="c"># create Folder structure </span>
+<span class="nb">ls</span> <span class="nt">-R</span> dir_root/ <span class="c"># confirm using ls</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> dir_root/<span class="o">{</span>dir_b<span class="o">}</span>/<span class="o">{</span>dir_l1,dir_l2<span class="o">}</span> 
+<span class="c"># This supports complex assignments</span>
+<span class="nb">mkdir</span> <span class="nt">-vp</span> dir_root/<span class="o">{</span>dir_b1,dir_b2<span class="o">}</span>/<span class="o">{</span>dir_l1,dir_l2<span class="o">}</span> 
+<span class="c"># v verbosely report terminal assignments </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="echo">echo</h2>
+
+<ul>
+  <li>Prints text to the terminal window</li>
+  <li>The most basic process in any programming language is the ability to out put information.</li>
+  <li>The echo command prints text to the terminal window and is typically used in shell scripts and batch files to output status text to the screen or a computer file.</li>
+  <li>Echo is also particularly useful for showing the values of environmental variables, which tell the shell how to behave as a user works at the command line or in scripts.</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="echo-1">echo</h2>
+
+<h3 id="examples-2">Examples</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/sandbox
+<span class="nb">echo </span>Some text to print out 
+<span class="c"># any string after the command will be printed </span>
+<span class="nb">echo</span> <span class="k">*</span> 
+<span class="c">#  Will Print all the files/folder using echo command </span>
+<span class="nb">echo</span> <span class="k">*</span>.jpeg 
+<span class="c">#  Will Print all the files of a specific kind</span>
+<span class="nb">echo</span> <span class="s2">"Some text to add to a file"</span> <span class="o">&gt;</span> file  
+<span class="c"># Use redirect operator &gt; to store output to file</span>
+<span class="nb">cat </span>file
+<span class="c"># the cat command will read and output the files content </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="cat--read-a-file-create-a-file-and-concatenate-files">cat — Read a file, create a file, and concatenate files</h2>
+
+<p>Cat (short for “concatenate“) is one of the more versatile commands and serves three main functions:</p>
+
+<ul>
+  <li>Displaying files</li>
+  <li>Combining multiple files</li>
+  <li>Creating new files.</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="cat">cat</h2>
+
+<h3 id="examples-3">Examples</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>file 
+<span class="c"># Displaying Contents of a File</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> file_2 
+<span class="c"># Allows to write text interactively </span>
+<span class="nb">cat </span>file_2 <span class="o">&gt;</span> file 
+<span class="c"># It is possible to redirect &gt; to output like echo </span>
+<span class="c"># However the above command overwrites the file contents </span>
+<span class="nb">cat </span>file file_1 file_2 
+<span class="c"># We can also view contents of multiple files</span>
+<span class="nb">cat </span>file_1 <span class="o">&gt;&gt;</span> file 
+<span class="c"># file_1 content will be appended at the end of file</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="variables-in-sh">Variables in sh</h2>
+
+<ul>
+  <li>A variable is a temporary store for a piece of information.</li>
+  <li>Essentially, all bash variables are character strings, however, depending on context, it is possible to run arithmetic operations and comparisons on variables.</li>
+  <li>As we are not going to write fancy bash scripts I will not go over arithmetics, however, check this <a href="https://sh.cyberciti.biz/guide/Perform_arithmetic_operations#Arithmetic_Expansion_in_sh_Shell">link</a> for examples.</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="variables----examples">Variables -  Examples</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a <span class="o">=</span> 10 <span class="c"># spaces are not allowed in variable assignment</span>
+<span class="nv">a</span><span class="o">=</span>10 <span class="c"># This will assign the string 10 to a </span>
+<span class="nv">b</span><span class="o">=</span>a <span class="c"># Assign the string a to b </span>
+<span class="nb">echo</span> <span class="nv">$a</span> <span class="c"># use the $ sign to call</span>
+<span class="nv">b</span><span class="o">=</span><span class="nv">$a</span> <span class="c"># assign a to b </span>
+<span class="nb">let </span>a+<span class="o">=</span>10 <span class="c"># Add ten to a </span>
+<span class="nb">echo</span> <span class="nv">$a</span> <span class="nv">$b</span> <span class="c"># confirm</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="ls--list-directory-contents">ls — (List directory contents)</h2>
+
+<ul>
+  <li>Probably the most common command. The <strong>ls</strong> command allows you to quickly view all files within the specified directory.</li>
+  <li>Like almost all bash commands it can be extended by adding different options</li>
+  <li>Let’s review some useful ones</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="ls--examples">ls — Examples</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span>       <span class="c"># list files and directories in bare format </span>
+<span class="nb">ls</span> <span class="nt">-a</span>    <span class="c"># List all files including hidden file</span>
+<span class="nb">ls</span> <span class="nt">-F</span>    <span class="c"># Will distinguish folders from files</span>
+<span class="nb">ls</span> <span class="nt">-l</span>    <span class="c"># Shows additional content </span>
+<span class="nb">ls</span> <span class="nt">-lh</span>   <span class="c"># human readable format.</span>
+<span class="nb">ls</span> <span class="nt">-R</span>    <span class="c"># Recursively list Sub-Directories </span>
+<span class="nb">ls</span> <span class="nt">-1</span>    <span class="c"># Force output to one column </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="cpmv---copy-move-or-rename-files-and-directories">cp,mv - copy, move or rename files and directories</h2>
+
+<h3 id="examples-4">Examples</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~ <span class="c"># make sure we are home </span>
+<span class="nv">output</span><span class="o">=</span>dir_root/dir_branch/dir_leaf 
+<span class="c"># make a variable to store path</span>
+<span class="nb">cp </span>file <span class="nv">$output</span> <span class="c"># copy file to path</span>
+<span class="nb">mv </span>file_1 <span class="nv">$output</span> <span class="c"># move file_1 to output</span>
+<span class="nb">ls</span> <span class="nv">$output</span> <span class="c"># list files in output</span>
+<span class="nb">mv </span>file <span class="nv">$output</span>/file_renamed 
+<span class="c"># move file to output and rename it </span>
+<span class="nb">mv</span> <span class="nt">-t</span> <span class="nb">dir </span>dir_1 dir_2 
+<span class="c"># move folders to --target-directory (long form of -t)</span>
+<span class="nb">cp</span> <span class="nt">-R</span> <span class="nb">dir</span> <span class="nv">$output</span> 
+<span class="c"># recursively copy folder content to path</span>
+<span class="nb">ls</span> <span class="nt">-FR</span> <span class="nv">$output</span> <span class="c"># list files in output again</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="history">history</h2>
+
+<p>The GNU history command keeps a list of all the other commands that have been run from that terminal session, then allows you to replay or reuse those commands instead of retyping them.</p>
+
+<p>//slide//</p>
+
+<h2 id="history-pipe">history, pipe</h2>
+
+<p>A pipe is a form of redirection (transfer of standard output to some other destination) that is used in Linux and other Unix-like operating systems to send the output of one command/program/process to another command/program/process for further processing.
+You can make it do so by using the pipe character ‘|’.</p>
+
+<p>//slide//</p>
+
+<h2 id="history-pipe-and-grep">history, pipe and grep</h2>
+
+<p>Global regular expression print (grep for short) is a command-line utility for searching plain-text data sets for lines that match a regular expression. Its name comes from the ed command g/re/p, which has the same effect: doing a global search with the regular expression and printing all matching lines.</p>
+
+<p>//slide//</p>
+
+<h2 id="history-pipe-and-grep---examples">history, pipe and grep - Examples</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">history</span> <span class="c"># will print out all the commands you made </span>
+<span class="nb">echo</span> <span class="nv">$HISTTIMEFORMAT</span>  
+<span class="c"># HISTTIMEFORMAT controls how history is printed </span>
+<span class="c"># %Y-%m-%d %H:%M:%S = Year month day hour minute second </span>
+<span class="nb">export </span><span class="nv">HISTTIMEFORMAT</span><span class="o">=</span><span class="s1">''</span> 
+<span class="c"># we can remove the formating to have only the commands </span>
+<span class="nb">history</span> | more 
+<span class="c"># The | symbol stands for piped commands </span>
+<span class="nb">history</span> | <span class="nb">grep ls</span> 
+<span class="c"># Will return any command with ls </span>
+<span class="nb">history</span> <span class="nt">-c</span> 
+<span class="c"># Will clear the history file </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="rm---remove-files-and-folders">rm - remove files and folders</h2>
+
+<ul>
+  <li>As the name suggests rm command is used to delete or remove files and directories</li>
+  <li>If you are new to bash then you should be very careful when using the rm command</li>
+  <li>In linux once you delete the files you can not recover the contents of files and directory</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="rm---examples">rm - Examples</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm </span>file_2 <span class="c"># delete file </span>
+<span class="nb">mkdir </span>dir_empty
+<span class="nb">rm </span>dir_empty 
+<span class="c"># will fail </span>
+<span class="nb">rm</span> <span class="nt">-d</span> dir_empty 
+<span class="c"># delete folder if it's empty</span>
+<span class="nb">rm</span> <span class="nt">-r</span> <span class="nb">dir</span> 
+<span class="c"># recursively delete folder and it's contents </span>
+<span class="nb">rm</span> <span class="nt">-ir</span> dir_root 
+<span class="c"># recursively delete contents and prompt before every removal</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="du---disc-usage">du - disc usage</h2>
+
+<ul>
+  <li>The du command, is used to command estimates file_path space usage.</li>
+</ul>
+
+<h3 id="examples-5">Examples</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">du</span> <span class="nt">-sh</span> ~ 
+<span class="c"># Human readable format home directory space usage.</span>
+<span class="nb">du</span> <span class="nt">-sh</span> <span class="nt">--</span> <span class="k">*</span> 
+<span class="c"># cumulative disk usage of all non-hidden directories</span>
+<span class="nb">du</span> <span class="nt">-hs</span> <span class="si">$(</span><span class="nb">ls</span> <span class="nt">-A</span><span class="si">)</span> 
+<span class="c"># Will include dotfiles (normally hidden from you)</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li>These are the most common commands you are likely to use</li>
+  <li>However, during the course we will learn additional ones</li>
+  <li>This is a good opportunity to go over the various commands and see that you understood everything</li>
+  <li>Also on a personal note, please make note for anything that isn’t clear so I can learn from your experience</li>
+  <li>Time to make a cup of coffee and take a short break</li>
+  <li>When done go to the advanced sh section</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<a href="/sitemap/">Sitemap</a>
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/@e_soreq"><i class="fab fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/esoreq"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 Eyal Soreq. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+

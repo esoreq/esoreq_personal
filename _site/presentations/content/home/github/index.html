@@ -1,0 +1,856 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Basics of Version Control (VC) - Eyal Soreq</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Eyal Soreq">
+<meta property="og:title" content="Basics of Version Control (VC)">
+
+
+  <link rel="canonical" href="http://localhost:4000/presentations/content/home/github/">
+  <meta property="og:url" content="http://localhost:4000/presentations/content/home/github/">
+
+
+
+
+
+  <meta name="twitter:site" content="@e_soreq">
+  <meta name="twitter:title" content="Basics of Version Control (VC)">
+  <meta name="twitter:description" content="personal description">
+  <meta name="twitter:url" content="http://localhost:4000/presentations/content/home/github/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Eyal Soreq",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Eyal Soreq Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="http://localhost:4000/images/apple-touch-icon-57x57.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="60x60" href="http://localhost:4000/images/apple-touch-icon-60x60.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="76x76" href="http://localhost:4000/images/apple-touch-icon-76x76.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="120x120" href="http://localhost:4000/images/apple-touch-icon-120x120.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="152x152" href="http://localhost:4000/images/apple-touch-icon-152x152.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:4000/images/apple-touch-icon-180x180.png?v=M44lzPylqQ">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-32x32.png?v=M44lzPylqQ" sizes="32x32">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/android-chrome-192x192.png?v=M44lzPylqQ" sizes="192x192">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-96x96.png?v=M44lzPylqQ" sizes="96x96">
+<link rel="icon" type="image/png" href="http://localhost:4000/images/favicon-16x16.png?v=M44lzPylqQ" sizes="16x16">
+<link rel="manifest" href="http://localhost:4000/images/manifest.json?v=M44lzPylqQ">
+<link rel="mask-icon" href="http://localhost:4000/images/safari-pinned-tab.svg?v=M44lzPylqQ" color="#000000">
+<link rel="shortcut icon" href="/images/favicon.ico?v=M44lzPylqQ">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="http://localhost:4000/images/mstile-144x144.png?v=M44lzPylqQ">
+<meta name="msapplication-config" content="http://localhost:4000/images/browserconfig.xml?v=M44lzPylqQ">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="http://localhost:4000/assets/css/academicons.css"/>
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/">Eyal Soreq</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/teaching/">Teaching</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/images/profile.png" class="author__avatar" alt="Eyal Soreq Ph.D.">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Eyal Soreq Ph.D.</h3>
+    <p class="author__bio">I apply and develop machine learning and data science methods to improve our understanding of dementia related behavioral patterns</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+      
+      
+      
+      
+       
+      
+        <li><a href="https://twitter.com/e_soreq"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/esoreq"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=_COL8loAAAAJ"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
+      
+      
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=Soreq+E&sort=pubdate"><i class="ai ai-pubmed-square ai-fw"></i> PubMed</a></li>
+      
+      
+        <li><a href="https://orcid.org/0000-0003-4809-4889"><i class="ai ai-orcid-square ai-fw"></i> ORCID</a></li>
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Basics of Version Control (VC)">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Basics of Version Control (VC)
+</h1>
+          
+        
+        
+        
+        
+             
+        
+    
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <h1 id="basics-of-version-control-vc">Basics of Version Control (VC)</h1>
+
+<ul>
+  <li>In this section we will cover what is Version Control</li>
+  <li>Why we need it</li>
+  <li>We will also learn how to install git as our VC system</li>
+  <li>And how to create our first repository to store important configuration files</li>
+  <li>As always <a href="https://blog.scottlowe.org/2015/01/14/non-programmer-git-intro/">here</a> is a good introduction to git from a non-programmer point of view</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="why-do-we-need-a-vc-system">Why do we need a VC system</h2>
+
+<ul>
+  <li>Up until now we covered how to work on the cluster, and how to move files from and to the cluster</li>
+  <li>However, this kind of behavior requires you to constantly keep both sides (cluster and home computer) in sync</li>
+  <li>If you also have a Desktop computer tracking what changed and when becomes very hard</li>
+  <li>When we consider working on a project with collaborators this is impossible</li>
+  <li>Luckily enough this problem isn’t uncommon and it is simple to solve using a process called version control</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="what-does-a-vc-do">What does a VC do?</h2>
+
+<ul>
+  <li>Version control is a system that simplifies managing and tracking changes made to content of a project</li>
+  <li>In this course we will learn how to use a tool called global information tracker (git for short)</li>
+  <li>And will rely on the service of <a href="https://en.wikipedia.org/wiki/GitHub">GitHub</a> as our online repositories providers.</li>
+  <li>This is because it is free of charge and easy to learn and use.</li>
+  <li>If you don’t have an account please press on <a href="https://github.com/join">join GitHub</a> and follow the instructions</li>
+  <li>Also <a href="https://gist.github.com/derhuerst/1b15ff4652a867391f03">install GitHub</a> on your local computer.</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="what-is-a-repository">What is a repository?</h2>
+
+<ul>
+  <li>A repository is a central location in which data is stored and managed.</li>
+  <li>Git can be viewed as a method to control, manage and document a projects evolution</li>
+  <li>Project evolution is composed of
+    <ul>
+      <li>Files (i.e. content)</li>
+      <li>Directories (i.e. hierarchy)</li>
+      <li>Changes across time (i.e. history)</li>
+      <li>Users (i.e. contribution)</li>
+    </ul>
+  </li>
+  <li>When you create a new repository a hidden dot folder named .git is created where that data is stored.</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="is-git-installed-on-the-cluster">Is git installed on the Cluster?</h2>
+
+<ul>
+  <li>Well the short answer is no!</li>
+  <li>We will have to install it ourselves</li>
+  <li>Unfortunately this is not as simple as setting it on your personal computer</li>
+  <li>This is because we don’t have administrator rights on the cluster</li>
+  <li>However we can use a process called compilation that will allow us to use open-source code to create a functional program</li>
+  <li>As most of you are lacking advanced programmatic skills (at the moment) I made the instructions as clear as I could.</li>
+  <li>If you follow them to the letter I’m sure we will manage</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="log-onto-the-cluster">Log onto the Cluster</h2>
+
+<ul>
+  <li>In order to install things we need to be on the cluster</li>
+  <li>So open a terminal on your personal computer</li>
+  <li>And use ssh to connect to the cluster</li>
+  <li><a href="#/ssh_login">This is how we did it previously</a></li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="download-git">Download git</h2>
+
+<ul>
+  <li>We will create a temporary folder on our home directory</li>
+  <li>Then we will use <code class="language-plaintext highlighter-rouge">wget</code> to download a compressed snapshot of the recent version of the git program (tar ball)</li>
+  <li>We will use tar (a compression program similar to zip) to uncompress the tar ball</li>
+  <li>Finally we will go in the directory</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/src <span class="c"># create a src dir </span>
+<span class="nb">cd</span> ~/src <span class="c"># go into it</span>
+<span class="c"># Download a version of GitHub</span>
+wget  https://github.com/git/git/archive/v2.26.2.tar.gz
+<span class="nb">tar</span> <span class="nt">-xzvf</span> <span class="k">*</span> <span class="c"># Expand the tar file (tarball)</span>
+<span class="nb">cd </span>git-2.26.2/ <span class="c"># And goto the folder </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="compiling-git-on-the-cluster">Compiling git on the cluster</h2>
+
+<ul>
+  <li>Compiling a program can be a frustrating experience</li>
+  <li>However, in this case this is highly unlikely</li>
+  <li>We use a process that is called <code class="language-plaintext highlighter-rouge">make</code> which will build the software specifically for the install location you want</li>
+  <li>In our case we are compiling to the bin folder in your home directory</li>
+  <li>The following <code class="language-plaintext highlighter-rouge">make install</code> will install the program in that location</li>
+  <li>Notice the use of double &amp; to chain commands</li>
+  <li>Running this will take a while and spit many words</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="o">&amp;&amp;</span> make <span class="nb">install
+</span>git <span class="nt">--version</span> <span class="c"># confirm that this worked </span>
+</code></pre></div></div>
+<p>//slide//</p>
+
+<h2 id="generate-a-new-rsa-key">Generate a new rsa key</h2>
+
+<ul>
+  <li>Now we need to generate a new rsa key</li>
+  <li>Previously we generated an rsa key from our home computer to simplify the login process to the cluster</li>
+  <li>We will now use the same process to simplify interaction to and from GitHub</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-t</span> rsa <span class="nt">-b</span> 4096 <span class="nt">-C</span> &lt;the_email@you_used_on_github.com&gt;
+<span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>ssh-agent <span class="nt">-s</span><span class="si">)</span><span class="s2">"</span> <span class="c"># Start the ssh-agent in the background.</span>
+ssh-add ~/.ssh/id_rsa <span class="c"># Add your SSH private key to the ssh-agent</span>
+<span class="nb">cat</span> ~/.ssh/id_rsa.pub <span class="c"># Print your key and copy it</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="setting-up-ssh-key-access-to-github">Setting up ssh key access to Github</h2>
+
+<p>Now you need to go over to this <a href="https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account">LINK</a> and follow the instructions to the letter.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~ 
+<span class="nb">rm</span> <span class="nt">-rf</span> src <span class="c"># Delete the src folder </span>
+<span class="c"># Add some information to you account </span>
+git config <span class="nt">--global</span> user.name <span class="s2">"Your git user Name"</span> 
+git config <span class="nt">--global</span> user.email <span class="s2">"&lt;your mail&gt;@mpi-mail.mpg.de"</span>
+<span class="c"># Open ~/.ssh/config</span>
+nano ~/.ssh/config
+<span class="c"># Copy the following line to the TOP of the file</span>
+IgnoreUnknown AddKeysToAgent,UseKeychain
+<span class="c"># Now check your connection to your GitHub repository </span>
+ssh <span class="nt">-T</span> git@github.com
+</code></pre></div></div>
+<p>//slide//</p>
+
+<h2 id="setting-up-cluster-access-to-github">Setting up cluster access to Github</h2>
+
+<ul>
+  <li>We are almost ready to use git and GitHub</li>
+  <li>We only need to setup the cluster to enable us to create and delete repositories from the command line</li>
+  <li>To do this we need to generate a token which is a way to extend normal passwords by associating different permissions for each token</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="creating-an-api-token-on-github">Creating an api token on Github</h2>
+
+<ul>
+  <li>Please follow this <a href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line">link</a> to create a personal access token for the command line</li>
+  <li>Or alternatively go <a href="https://github.com/settings/tokens">here</a> if you don’t need the tutorial to generate a new token</li>
+  <li>Make sure to tick the following boxes:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Delete repositories</code></li>
+      <li><code class="language-plaintext highlighter-rouge">repo</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="a-small-detour-to-talk-about-security-and-permissions">A small detour to talk about security and permissions</h2>
+
+<ul>
+  <li>The token you just created is a scary thing as it allows anyone with it to delete your repositories</li>
+  <li>You should treat it and any password on the cluster with care</li>
+  <li>One way to do that is to separate between the configuration files and sensitive information</li>
+  <li>In linux any file or folder will have permission settings</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="why-are-permissions-important-and-useful">Why are permissions important and useful?</h2>
+
+<ul>
+  <li>Permissions control who can have access to a file or folder</li>
+  <li>And more importantly what kind of access is granted</li>
+  <li>A good example is experimental raw data</li>
+  <li>We will want many people to have read access</li>
+  <li>But other than the creator of the data no one should have write access</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="basics-of-permissions">Basics of permissions</h2>
+
+<ul>
+  <li>Using <code class="language-plaintext highlighter-rouge">ls -l ~/.bashrc</code> give the following :
+<img src="/img/Tutorial_bashrc_permissions.png" alt="" /></li>
+  <li>Let’s unpack the bottom line from right to left</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/usr/users/esoreq/.bashrc</code></td>
+      <td>full path name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">May 12 08:43</code></td>
+      <td>The <strong>last</strong> modification time</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">172</code></td>
+      <td>File size in bytes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MLNP</code></td>
+      <td>Group name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">esoreq</code></td>
+      <td>Owner name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">1</code></td>
+      <td>Number of links</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-rw-------</code></td>
+      <td>Permissions</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>//slide//</p>
+
+<h2 id="basics-of-permissions-1">Basics of permissions</h2>
+
+<ul>
+  <li>Permission settings are grouped in a string of characters (-, r, w, x)</li>
+  <li>The characters r, w, and x stand for <strong>read</strong>, <strong>write</strong>, and <strong>execute</strong>.
+classified into four sections:
+    <ul>
+      <li><span style="color:GOLD">-</span>rwxrwxrwx - File type has three possibilities:
+        <ul>
+          <li>regular file (–)</li>
+          <li>a directory (d)</li>
+          <li>or a link (i)</li>
+        </ul>
+      </li>
+      <li>-<span style="color:GOLD">rwx</span>rwxrwx - File permission of the user (owner)</li>
+      <li>-rwx<span style="color:GOLD">rwx</span>rwx - File permission of the owner’s group</li>
+      <li>-rwxrwx<span style="color:GOLD">rwx</span> - File permission of other users</li>
+    </ul>
+  </li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="changing-permissions">Changing permissions</h2>
+
+<ul>
+  <li>Any Linux user, will at some point need to modify the permission settings of a file/directory.</li>
+  <li>This can be done using the <code class="language-plaintext highlighter-rouge">chmod</code> command.</li>
+  <li>The basic syntax is:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> <span class="o">[</span>permission] <span class="o">[</span>file_name]
+<span class="c"># one way that is the simplest to remember </span>
+<span class="nb">chmod </span><span class="nv">u</span><span class="o">=</span>rwx,g<span class="o">=</span>rwx,o<span class="o">=</span>rwx <span class="o">[</span>file_name]
+</code></pre></div></div>
+<ul>
+  <li>rwx stand for r(ead),w(rite) and (e)x(ecute)</li>
+  <li>and ugo stand for u(ser), g(roup) and o(ther)
+//slide//</li>
+</ul>
+
+<h2 id="changing-permissions-using-the-numeric-mode">Changing permissions using the numeric mode</h2>
+
+<ul>
+  <li>Instead of letters, the numeric format represents privileges with numbers:
+    <ul>
+      <li>r(ead) has the value of 4</li>
+      <li>w(rite) has the value of 2</li>
+      <li>(e)x(ecute) has the value of 1</li>
+      <li>no permission has the value of 0</li>
+    </ul>
+  </li>
+  <li>Privileges are summed up and depicted by one number.</li>
+  <li>The permission is compressed to three (3) numbers</li>
+  <li>Each representing the summation of privileges for each category (user, group, owner).</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="changing-permissions-using-the-numeric-mode-1">Changing permissions using the numeric mode</h2>
+
+<ul>
+  <li>Therefore, the possibilities are:
+    <ul>
+      <li>7 = read, write, and execute permission</li>
+      <li>6 = read and write privileges</li>
+      <li>5 = read and execute privileges</li>
+      <li>4 = read privileges</li>
+    </ul>
+  </li>
+  <li>And in practice the basic syntax changes to:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>750 <span class="o">[</span>file_name] <span class="c"># -rwxr-x---</span>
+<span class="nb">chmod </span>400 <span class="o">[</span>file_name] <span class="c"># -r--------</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="back-to-practicals">Back to practicals</h2>
+
+<ul>
+  <li>To have our passwords protected we will create a personal folder</li>
+  <li>Make sure only we have access to it</li>
+  <li>Create a file called passwords</li>
+  <li>Append our github token into it</li>
+  <li>And add a line to our bashrc file to source this variable on login</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">GIT_TOKEN</span><span class="o">=</span>&lt;the token&gt;
+<span class="nb">mkdir</span> ~/personal <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/personal
+<span class="nb">chmod </span>700 ~/personal <span class="c"># Only you will have access</span>
+<span class="nb">touch </span>passwords
+<span class="nb">echo</span> <span class="s2">"GIT_TOKEN=</span><span class="nv">$GIT_TOKEN</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> passwords
+<span class="nb">echo</span> <span class="s2">". ~/personal/passwords"</span> <span class="o">&gt;&gt;</span> ~/.bashrc
+<span class="nb">.</span> ~/.bashrc
+</code></pre></div></div>
+<ul>
+  <li>If all worked well you should have a working git on the cluster</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="creating-your-first-repository">Creating your first repository</h2>
+
+<ul>
+  <li>Let’s create a repository that stores the various configuration files we just created</li>
+  <li>This is not solely for the experience of creating a repository,</li>
+  <li>It is useful to have when moving from one position to another</li>
+  <li>And allows you to share your work with other people in your lab</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="initializing-a-git-folder">Initializing a git folder</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">git init</code> function is used to create the hidden <code class="language-plaintext highlighter-rouge">.git</code> folder within your repository</li>
+  <li>When we run <code class="language-plaintext highlighter-rouge">git init [foldername]</code> we create a new folder with the <code class="language-plaintext highlighter-rouge">.git</code> folder inside</li>
+  <li>Alternatively we can initialize an existing folder by going into the folder and running <code class="language-plaintext highlighter-rouge">git init</code> without any other options</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init <span class="nv">$HOME</span>/dotfiles/ <span class="c"># make a git initialized folder </span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="add-some-content">Add some content</h2>
+
+<ul>
+  <li>We will need to add some content (i.e. files and folders) into our repository</li>
+  <li>Good practice is to always include a Readme.md markdown file</li>
+  <li>Markdown is a rich text syntax that we will learn next week</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># copy over your dot files</span>
+<span class="nb">cp</span> .bash_aliases .bashrc .profile .bash_profile ~/dotfiles/
+<span class="nb">ls</span> <span class="nt">-af</span> dotfiles/.??<span class="k">*</span>  <span class="c"># confirm that they were copied </span>
+<span class="nb">cd</span> ~/dotfiles <span class="c"># goto the folder </span>
+<span class="nb">touch </span>Readme.md <span class="c"># create a readme file (good practice)</span>
+<span class="nb">echo</span> <span class="s2">"A repository for dot configuration files"</span> <span class="o">&gt;&gt;</span> Readme.md
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="create-a-remote-repository">Create a remote repository</h2>
+
+<ul>
+  <li>We now have a local folder with some files inside</li>
+  <li>We want to have a matching repository on the GitHub site</li>
+  <li>We could just use the web interface to manually create our dotfiles repository</li>
+  <li>An alternative way would be to create it programmatically</li>
+  <li>Go to this <a href="https://developer.github.com/v3/guides/getting-started/#create-a-repository">link</a> to gain a deeper understanding of this issue</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">AUTH</span><span class="o">=</span><span class="s2">"Authorization: token </span><span class="nv">$GIT_TOKEN</span><span class="s2">"</span>
+<span class="nv">DATA</span><span class="o">=</span><span class="s1">'{"name":"dotfiles","private": true}'</span> <span class="c"># create a JSON structure</span>
+curl <span class="nt">-H</span> <span class="s2">"</span><span class="nv">$AUTH</span><span class="s2">"</span> https://api.github.com/user/repos <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$DATA</span><span class="s2">"</span>
+</code></pre></div></div>
+<p>//slide//</p>
+
+<h2 id="git-basics---working-with-remotes">Git Basics - Working with Remotes</h2>
+
+<ul>
+  <li>Final required setup is to tell our local directory where it’s remote counterpart is located</li>
+  <li>Again to understand this concept further you can (but don’t have to) go <a href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes">here</a></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Tell the folder where the remote repository is</span>
+git remote add origin git@github.com:&lt;git_user_name&gt;/dotfiles.git
+</code></pre></div></div>
+<p>//slide//</p>
+
+<h2 id="lets-add-some-files-to-our-repository">Let’s add some files to our repository</h2>
+
+<ul>
+  <li>You should now have an empty repository on GitHub with a link resembling this <code class="language-plaintext highlighter-rouge">https://github.com/&lt;username&gt;/dotfiles</code></li>
+  <li>Goto the link (change the user name to your git account) and confirm that it is empty</li>
+  <li>We want to tell git which files to upload to the remote folder</li>
+  <li>Let’s add files with the <code class="language-plaintext highlighter-rouge">add</code> command</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .bashrc <span class="c"># adding a single file</span>
+git add <span class="nt">--all</span> <span class="c"># To add everything in your directory</span>
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="lets-commit-and-push-files-to-the-remote-repository">Let’s commit and push files to the remote repository</h2>
+
+<ul>
+  <li>Recall that git is much more than a method to backup files and structure of a project</li>
+  <li>The more important aspect of git is tracking the <strong>evolution</strong> of the project</li>
+  <li>Which mean that we can add a file or files multiple times</li>
+  <li>Committing is the process of adding meta information about the current changes made to the repository</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="lets-commit-and-push-files-to-the-remote-repository-1">Let’s commit and push files to the remote repository</h2>
+
+<ul>
+  <li>In practice, we want a short (50 char) sentence describing what changes you made to the content</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Make nano your default editor  </span>
+<span class="nb">echo</span> <span class="s2">"export EDITOR='nano'"</span> <span class="o">&gt;&gt;</span> ~/.bashrc
+<span class="nb">.</span> ~/.bashrc 
+<span class="c"># Tell git we want to commit and add why </span>
+git commit <span class="nt">-m</span> <span class="s2">"updating dotfiles on </span><span class="si">$(</span><span class="nb">date</span> <span class="nt">-u</span><span class="si">)</span><span class="s2">"</span>
+<span class="c"># Push our files to the web</span>
+git push <span class="nt">-u</span> origin master
+</code></pre></div></div>
+
+<p>//slide//</p>
+
+<h2 id="go-to-your-new-repository">Go to your new repository</h2>
+
+<ul>
+  <li>Use the web interface to change one of your files</li>
+  <li>One option is to add some of the aliases I showed you to the .bash_aliases file</li>
+  <li>Here is a  <a href="#/alias">link</a> to the relevant slide</li>
+  <li>It is much easier to edit these kinds on the web (or on your local computer)</li>
+  <li>Now we will pull the updated repository back to the cluster</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/dotfiles
+git status
+git pull origin master
+</code></pre></div></div>
+
+<ul>
+  <li>You should now have an updated .bash_aliases on your cluster</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="final-step-for-this-week">Final step for this week</h2>
+
+<ul>
+  <li>Please send me an email with the email you have on your github account</li>
+  <li>This should be addressed to eyal.soreq@mpi-mail.mpg.de</li>
+  <li>The topic should be add me as a collaborator to the course github</li>
+  <li>See you online</li>
+</ul>
+
+<p>//slide//</p>
+
+<h2 id="congratulations-you-are-the-proud-owner-of-a-dotfiles-repository">Congratulations you are the proud owner of a <code class="language-plaintext highlighter-rouge">dotfiles</code> repository</h2>
+
+<ul>
+  <li>This was a cool but annoying process</li>
+  <li>Next we will cover how to collaborate to a repository you don’t own</li>
+  <li>After that we will revisit other important git commands and end this weeks material</li>
+  <li>Take a well earned break and move forward when ready</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<a href="/sitemap/">Sitemap</a>
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/@e_soreq"><i class="fab fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/esoreq"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 Eyal Soreq. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+

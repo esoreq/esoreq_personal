@@ -1,0 +1,35 @@
+--- 
+
+## .bash_modules 
+
+- Log back onto the cluster (using either the hpc web terminal or your own)
+- Now lets extend the cluster functionality using modules 
+- Open the .bashrc file and add the following code 
+
+{{< highlight bash>}}
+if [ -f ~/.bash_modules ]; then
+    . ~/.bash_modules # --> source modules if present.
+fi
+{{< / highlight >}}
+
+--- 
+
+## What are Modules
+
+- The cluster supports many users from different disciplines. 
+- Each of them will require a different set of tools.  
+- Furthermore, some of them will require different versions 
+- Later on the course we will be using the cluster full power 
+
+
+{{< highlight bash>}}
+module avail  # will list all available modules 
+module avail python # will search and list all python versions
+module load python # will load the default python 
+module unload  python #  will unload python
+module purge # Unloads all loaded modules
+{{< / highlight >}}
+
+--- 
+
+## The Modules we will use 
