@@ -8,7 +8,7 @@ date: 2021-05-31
 location: "Leipzig, Germany"
 ---
 
-In this five-day crash course we learn how to use gwdg Jupyter-cloud as a primary analytical tool. 
+In this five-day crash course we learn how to use gwdg Jupyter-cloud, anaconda and python as your primary analytical tools. 
 
 <iframe
   src="https://esoreq.github.io/Real_site/"
