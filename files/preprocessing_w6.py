@@ -154,8 +154,12 @@ def process_bmi(output_file):
 
 def tidy_freesurfer_volume(output_file):
     df = load('clean')["FS_FSDATA"]  # extract only freesurfer data
-    save_pickle(output_file, df)
-    return df
+    _df = df.loc[:, df.columns[df.columns.str.contains('_volume')]].div(
+        df.IntraCranialVol, axis=0)
+    _df = pd.concat([df[['Subject', 'days_since_entry', 'M/F',
+                         'Hand', 'Race', 'Ethnicity']], _df], axis=1)
+    save_pickle(output_file, _df)
+    return _df
 
 def tidy_freesurfer_thickness(output_file):
     df = load('clean')["FS_FSDATA"]  # extract only freesurfer data
