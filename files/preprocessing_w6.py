@@ -115,12 +115,11 @@ def drop_missing_columns(df, thr):
 
 def clean_data(output_file, thr=0.9):
     data = load('raw')
-    dropped = {}
     for k in data.keys():
-        data[k], dropped[k] = drop_missing_columns(data[k], thr)
+        data[k] = drop_missing_columns(data[k], thr)
         data[k] = days_since_entry(data[k])
     save_pickle(output_file, data)
-    return data, dropped
+    return data
 
 
 def days_since_entry(df):
