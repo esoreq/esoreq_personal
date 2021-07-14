@@ -110,7 +110,7 @@ def drop_missing_columns(df, thr):
     columns_2_drop = _df[_df['%missing'] > thr]
     if not columns_2_drop.empty:
         df = df.drop(columns=columns_2_drop.index)
-    return df, columns_2_drop
+    return df
 
 
 def clean_data(output_file, thr=0.9):
